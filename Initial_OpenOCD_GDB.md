@@ -54,9 +54,10 @@ Bare metal of STM32. In this file, there are two types of MCU has used were STM3
    - type monitor reset init to reset board
    - monitor resume to continue code
    - monitor reset halt to access into debug mode
+     
      <img width="609" height="138" alt="image" src="https://github.com/user-attachments/assets/e86f8fe2-c30e-4688-b8a5-b10641a08136" />
 
-*EXAMPLE: - Developer want to test out if the LED is blinking or not and delay is very fast that normal eyes could not see it, after command "monitor reset halt" to access into debug mode, type break main to direct into main() function.
+*EXAMPLE: - Developer want to test out if the LED is blinking or not and delay is very fast that normal eyes could not see it, after command "monitor reset halt" to access into debug mode, type break main to direct into          main() function.
           - type continue or next to go step by step in the code til reach the delay line
           - From this point, developer could see the led still blinking normally since it break right after the delay, developer find out that the delay time was too fast to modify it longer.
 
