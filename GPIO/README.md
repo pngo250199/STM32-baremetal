@@ -37,3 +37,16 @@ For example choosing pin PA5 (bit 11:10):
   - 0x1 = 0001 -> write at bit 10 -> 0001 (01 is output mode -> using port PA5 to output data)
 
 
+For STM32F1 blue pill
+  - developer not using MODER or ODR, instead that developer usr CRL (configuration register low) and CRH (configurations register high)
+  *NOTE: CRL using for pins 0-7 and CRH using for pins 8-15. 8 pins of CRL will start with 0 while 8 pins of CRH will start with 1.
+  Code register example for any pins of CRL from 0-7 
+```
+  pin &= ~(0xF << (pin number *4); // *4 because the F1 using 4 bits and 0xF is 1111 in binary
+  pin |= (mode << (pin number * 4); modes are 00, 01, 10, and 11
+```
+  Code register example for any pins of CRH from 8-15
+```
+  pin &= ~(0xF << ((pin number - 8) *4)); // *4 because the F1 using 4 bits and 0xF is 1111 in binary
+  pin |= (mode << ((pin number - 8) * 4)); modes are 00, 01, 10, and 11
+```
