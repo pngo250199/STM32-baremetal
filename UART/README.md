@@ -20,3 +20,24 @@
       - Data length
       - Parity
       - Stop bits
+    
+   3. How functions of UART works
+      - In STM32F4x series, UART using PA2 and 3 in order for transmit and receive. Same with GPIO, uart need to enable its RCC at AHB1
+   ```
+          RCC->AHB1ENR |= GPIOAEN;
+    RCC->APB1ENR |= USART2EN;
+
+    // PA2 (TX), PA3 (RX) → AF mode
+    GPIOA->MODER &= ~(0xF << (2 * 2));
+    GPIOA->MODER |=  (0xA << (2 * 2));
+   ```
+      - The next step is declare Altenate function, AF in uart setting for specific pins that telling hardware thta those pins no simply I/O pins any longer. Instead that, those specific pins serve as TX and RX pins
+  
+   ```
+       // AF7 (USART2)
+    GPIOA->AFR[0] &= ~(0xFF << 8);
+    GPIOA->AFR[0] |=  (0x77 << 8);
+   ```
+AFR[0] for pins 0 to 7
+AFR[1] for pins 8 to 15
+In this case we use PA2 and 3 so AFR[0]
