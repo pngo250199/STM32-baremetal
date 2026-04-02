@@ -41,3 +41,37 @@
 AFR[0] for pins 0 to 7
 AFR[1] for pins 8 to 15
 In this case we use PA2 and 3 so AFR[0]
+
+
+
+4. Initial receive and transmit functions
+```
+   void uart_transmit(char data) //sending input out from MUC
+{
+    while (!(USART2->SR & SR_TXE)){}
+    USART2->DR = data;
+}
+
+char uart_receive(void) //receive input from others
+{
+	while (!(USART2 -> SR & SR_RXNE)){}
+
+	return (char)(USART2 -> DR);
+}
+```
+
+
+
+```
+void uart_print(char *str)
+{
+    while (*str)
+    {
+        uart_transmit(*str++);
+    }
+}
+  ```
+*NOTE: unlike C++, string not sprint whole paragrapth, so we using the loop while for spring every single charater 
+for example in main we want to print "testing...", with str++ that will print letter by letter until finish whole paragraph.
+
+*NOTE: For this topic, developer should careful in baud rate and system rate. if different baud rate, MCUs cannot communicate in the same speed will give garbage data. For system rate, if calculating wrong even a small value, the board would read too fast and miscommunication still giving garbage data, however for this one could temperary solve by debugging with gdb since gdb go step by step that make the timer slow and match with the communication speed that make the data stable.
