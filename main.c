@@ -94,7 +94,7 @@ int main(void)
 
 
 
-/*
+
 int sensor_value;
 int main(void)
 {
@@ -131,25 +131,17 @@ int main(void)
 
     //}
 
-	/*while(1)
-	{
-		//uart_print("testing...\r\n");
+	  while(1)
+	    {
+	        adc_start_conversation();     // start conversion
 
-		//char c = uart_receive();
-		//uart_transmit(c);
-		//for (volatile int i = 0; i < 10; i++);
+	        sensor_value = adc_read();    // read ADC value
 
+	        char msg[50];
+	        sprintf(msg, "Value: %lu\r\n", sensor_value);
+	        uart_print(msg);
 
-		sensor_value = adc_read();
-		printf("Value: %d\r\n", sensor_value);
-	}
-
-	while(1)
-	{
-	    uart_print("HELLO\r\n");
-
-	    for (volatile int i = 0; i < 100000; i++);
-	}
+	        // simple delay (prevents terminal flooding)
+	        for (volatile int i = 0; i < 100000; i++);
+	    }
 }
-
-*/
