@@ -90,3 +90,66 @@ int main(void)
 	}
 
 }
+
+
+
+
+/*
+int sensor_value;
+int main(void)
+{
+
+	uart_init();
+	adc_init();
+	adc_start_conversation();
+	//adc_init();
+	//adc_read();
+    //  9: Enable clock access to GPIOA
+	// RCC->AHB1ENR |=  GPIOAEN;
+
+	// GPIOA->MODER &= ~(11U<<10); //  11: Set bit 11 to 0
+	// GPIOA->MODER |= (1U<<10);  //  10: Set bit 10 to 1
+
+	 //GPIOA->MODER &= ~(3U<<2); //  3: Set bit 3 to 2
+	 //GPIOA->MODER |= (1U<<2);  //  2: Set bit 2 to 1
+
+
+    //  21: Start of infinite loop
+    //while(1)
+    //{
+    	//  12: Set PA5(LED_PIN) high
+	//	GPIOA->ODR^= LED_PIN5;
+
+        // 13: Simple delay
+	//	for(volatile uint32_t i=0;i<100000;i++){}
+
+    	//  12: Set PA5(LED_PIN) high
+	//	GPIOA->ODR^= LED_PIN1;
+
+        // 13: Simple delay
+	//	for(volatile uint32_t i=0;i<100000;i++){}
+
+    //}
+
+	/*while(1)
+	{
+		//uart_print("testing...\r\n");
+
+		//char c = uart_receive();
+		//uart_transmit(c);
+		//for (volatile int i = 0; i < 10; i++);
+
+
+		sensor_value = adc_read();
+		printf("Value: %d\r\n", sensor_value);
+	}
+
+	while(1)
+	{
+	    uart_print("HELLO\r\n");
+
+	    for (volatile int i = 0; i < 100000; i++);
+	}
+}
+
+*/
