@@ -19,7 +19,7 @@
 #define SR_END_OF_CONVO (0x1 <<1)
 
 
-void adc_init(void)
+/*void adc_init(void)
 {
 	RCC -> AHB1ENR |= GPIOAEN; //enable clock GPIO
 	GPIOA -> MODER &= ~(0xf << 2);
@@ -30,6 +30,24 @@ void adc_init(void)
 	ADC1 -> CR2 |= CHANNEL_REGISTER2_ADC_ON; //enable ADC
 	//systick_delay(1000); //delay
 }
+*/
+void adc_init(void)
+{
+    RCC->AHB1ENR |= GPIOAEN;
+
+    // ONLY configure PA1
+    GPIOA->MODER &= ~(0x3 << 2);
+    GPIOA->MODER |=  (0x3 << 2);
+
+    RCC->APB2ENR |= ADC1EN;
+
+    ADC1->SQR3 = 1;        // channel 1
+    ADC1->SQR1 = 0;
+
+    ADC1->CR2 |= CHANNEL_REGISTER2_CONTINUE;
+    ADC1->CR2 |= CHANNEL_REGISTER2_ADC_ON;
+}
+
 
 void adc_start_conversation(void)
 {
