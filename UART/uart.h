@@ -12,8 +12,8 @@
 #include "stm32f4xx.h"
 
 void uart_init(void);
-//void uart_transmit(char data);
-//uart_receive(char data);
+void uart_transmit(char data);
+uart_receive(char data);
 
 
 //int __io_putchar(int data);
