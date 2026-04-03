@@ -103,3 +103,27 @@ ADC1 -> SQR3 = (channel_1 << (5* (sequence_position_1 -1))) | (channel_8 << (5* 
 ADC1 -> SQR1 = (2 << 20);
 
 ```
+
+
+- That was all for initial, the last step is making convension start and adc_read for reading data
+```
+void adc_start_conversation(void)
+{
+    // 1. enable continious convo
+    ADC1 -> CR2 |= CHANNEL_REGISTER2_CONTINUE;
+
+    //start ADC conversinm
+    ADC1 -> CR2 |= CHANNEL_START;
+}
+
+uint32_t adc_read(void)
+{
+
+
+    // 2. Wait for the "End of Conversion" (EOC) flag in the Status Register
+    while (!(ADC1 -> SR & SR_END_OF_CONVO)){}
+
+    // 3. Return the result from the Data Register
+    return (ADC1 -> DR);
+}
+```
