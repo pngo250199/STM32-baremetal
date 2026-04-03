@@ -127,3 +127,6 @@ uint32_t adc_read(void)
     return (ADC1 -> DR);
 }
 ```
+ *IMPORTANT: When calling fuction in main, there are two mode continue and single 
+ For continue mode which mean only update new value, developer dont need to call adc_start_conversation() inside the loop anymore once already call outside the loop inside main
+ For single mode, call function again inside the loop
