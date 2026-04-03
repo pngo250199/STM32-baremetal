@@ -91,14 +91,14 @@ Example: Developer want to read 3 channels 1, 8 and 12
 Sequence can be follow by formula: channel << (5* (sequence_position -1))
 ```
 #define sequence_position_1 1
-#define sequence_position_2 3
+#define sequence_position_2 2
 #define sequence_position_3 3
 #define channel_1 1
 #define channel_8 8
 #define channel_12 12
 
 //sequence
-ADC1 -> SQR3 = channel_1 << (5* (sequence_position_1 -1)) | channel_8 << (5* (sequence_position_2 -1)) | channel_12 << (5* (sequence_position_3 -1));
+ADC1 -> SQR3 = (channel_1 << (5* (sequence_position_1 -1))) | (channel_8 << (5* (sequence_position_2 -1))) | (channel_12 << (5* (sequence_position_3 -1)));
 //lenght
 ADC1 -> SQR1 = (2 << 20);
 
