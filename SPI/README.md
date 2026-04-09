@@ -28,13 +28,9 @@ void SPI_init(void)
     GPIOA -> AFR[0] |= ((1U << 20) | (1U << 22) | (1U << 24) | (1U << 26) | (1U << 28));
     GPIOA -> AFR[0] &= ~((1U << 21) | (1U << 23) | (1U << 25) | (1U << 27) | (1U << 31));
 ```
-
-
-
-
- - In configuration of SPI have CPOL, duplex, MSB and mode to master.
+- In configuration function, developer will setting up specific for the slave that going to use. In this function there are four critical things need to be setting up are Clock Polarity (CPOL), Master/Slave declaration, Clock Speed (prescals), and Clock Phase (CPHA). 
  - Start with CPOL (Clock Polarity), short explaination is the default or inactive state of a signal
    	- CPOL = 0 -> clock idle LOW
    	- CPOL = 1 -> clock idle HIGH
-   	- The purpose of CPOL is define the idle state of the clock line
+   	- The purpose of CPOL (Clock Polarity) is to define the idle state of the clock line (SCK) in a synchronous serial interface like SPI. It ensures that both the 	Master and the Slave agree on what the signal looks like when no data is being moved. Without a defined CPOL, the receiver wouldn't know if the first voltage 		transition it sees is the start of a bit or just electrical noise.
 	
