@@ -5,7 +5,7 @@
    - Developer usually need to setting up for slaves first before setting up clock execute from master
    - In embedded, developers going to separate initial and config into two different functions. Initial will setting up basic clock, SPI mode for GPIO and config will setting up for type of transmition for master and slave
      ```
-     void SPI_init(void)
+void SPI_init(void)
 {
 	//RCC for GPIOA
     RCC->AHB1ENR |= GPIOAEN;
