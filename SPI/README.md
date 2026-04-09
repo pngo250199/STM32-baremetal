@@ -30,5 +30,11 @@ void SPI_init(void)
 ```
 
 
-	- In configuration of SPI have CPOL, duplex, MSB and mode to master
+
+
+ - In configuration of SPI have CPOL, duplex, MSB and mode to master.
+ - Start with CPOL (Clock Polarity), short explaination is the default or inactive state of a signal
+   	- CPOL = 0 -> clock idle LOW
+   	- CPOL = 1 -> clock idle HIGH
+   	- The purpose of CPOL is define the idle state of the clock line
 	
