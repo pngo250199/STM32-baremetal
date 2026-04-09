@@ -28,3 +28,7 @@ void SPI_init(void)
     GPIOA -> AFR[0] |= ((1U << 20) | (1U << 22) | (1U << 24) | (1U << 26) | (1U << 28));
     GPIOA -> AFR[0] &= ~((1U << 21) | (1U << 23) | (1U << 25) | (1U << 27) | (1U << 31));
 ```
+
+
+	- In configuration of SPI have CPOL, duplex, MSB and mode to master
+	
