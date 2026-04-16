@@ -42,4 +42,23 @@ void SPI_init(void)
    	- CPOL = 0 -> clock idle LOW
    	- CPOL = 1 -> clock idle HIGH
    	- The purpose of CPOL (Clock Polarity) is to define the idle state of the clock line (SCK) in a synchronous serial interface like SPI. It ensures that both the Master and the Slave agree on what the signal looks like when no data is being moved. Without a defined CPOL, the receiver wouldn't know if the first voltage transition it sees is the start of a bit or just electrical noise.
+   	- Developer active bit by this map
+	<img width="862" height="777" alt="image" src="https://github.com/user-attachments/assets/82927639-e687-4a00-bde5-6793bccdb037" />
+
+*NOTE: For the BR[2:0], Look at the table for bits [5:3] BR[2:0]. You will see a list of dividers:
+
+000: fPCLK/2
+
+001: fPCLK/4 (This is what your code is setting)
+
+010: fPCLK/8
+
+...and so on.
+
+```
+    SPI1 -> CR1 |= (1U << 3);
+    SPI1 -> CR1 &= ~(1U << 4);
+    SPI1 -> CR1 &= ~(1U << 5);
+```
+
 	
