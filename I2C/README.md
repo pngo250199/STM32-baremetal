@@ -1,1 +1,12 @@
-
+1. Understanding I2C
+   - Multi-master, multi-slave, packet-switches, single-ended, serial communication bus. Designed for short-distance communication within a single device or between multiple devices on the same board. I2C is known for its simplicity and ease of use, making it a popular choice for communication between microcontroller and other ICs
+   - I2C used two wires are SDA and SCL stand fors Serial Data and Serial Clock
+   - Multiple master devices can initial communication on the bus, and multiple slave devices can respond. This flexibility allows for complex communication setups. I2C protocol supports up to 128 devices with 7-bit addressing
+   - Each device on the I2C bus has a unique address
+   - Master device initiates communictaion and generates a clock signal, control the flow of data and can address multiple slaves
+   - Slave device response to master's command and performs the requirested operations. Each slave has a unique 7bit or 10bit address that the master uses to identity it
+   - Start condition with SCL high and SDA low
+   - address fram: master sends the address of the target slave device, followed by a read/write bit indicating the operation type (0 for write and 1 for read)
+   - Acknowledge (ACK) bit is where the slave responds by pulling the SDA line low during the next clock pulse
+   - Data frame is where data is transferred in 8-bit frams. Each byte is followed by an ACK bit from the receiver.
+   - Stop condition with SCL high and SDA high
