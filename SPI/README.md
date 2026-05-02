@@ -41,15 +41,17 @@ void SPI_init(void)
 - Structure to write down AF register is
 ```
 GPIOx -> AFR[0 or 1] &= ~(0xF << (pin* 4));
-GPIOx -> AFR[0 or 1] |= (pin number << (pin *4));
+GPIOx -> AFR[0 or 1] |= (AF mode number << (pin *4));
 ```
-NOTE: 0 for pin 0 to 7 and 1 for pin 8 to 15. 
+NOTE: 0 for pin 0 to 7 and 1 for pin 8 to 15. There are 8 AFR mode 
+<img width="737" height="327" alt="Screenshot From 2026-05-02 14-01-37" src="https://github.com/user-attachments/assets/de86edfb-f6a2-4390-884b-81b9e80120e0" />
+
 for this style:
 ```
 GPIOA -> AFR[0] |= ((1U << 20) | (1U << 22) | (1U << 24) | (1U << 26) | (1U << 28));
 GPIOA -> AFR[0] &= ~((1U << 21) | (1U << 23) | (1U << 25) | (1U << 27) | (1U << 31));
 ```
-The logic is set each bit to become the number of pin, for example 5 is 0101, pin A is bit [23:20] so when clear and write we have
+The logic is set each bit to become AF number mode, for example 5 is 0101, pin A is bit [23:20] so when clear and write we have
 - bit 20: 1
 - bit 21: 0
 - bit 22: 1
