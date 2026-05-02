@@ -24,19 +24,38 @@ void SPI_init(void)
     
     
     //set PA5 6 and 7 for alternate function pins
-    GPIOA -> MODER &= ~((1U << 10) | (1U << 12) | (1U << 14)); //clear bit for PA5 6 and 7
-    GPIOA -> MODER |= ((1U << 11) | (1U << 13) | (1U << 15)); //set bit for PA5 6 and 7
+    GPIOA -> MODER &= ~((3U << 10) | (3U << 12) | (3U << 14)); //clear bit for PA5 6 and 7
+    GPIOA -> MODER |= ((1U << 10) | (1U << 12) | (1U << 14)); //set bit for PA5 6 and 7
 
     
     //set PA9 for output
-    GPIOA -> MODER &= (1U << 19);
-    GPIOA -> MODER |= (1U << 18);
+    GPIOA -> MODER &= (1U << 18);
+    GPIOA -> MODER |= (2U << 18);
     
     
     //bit 0 to 7 using AFR 0 
-    GPIOA -> AFR[0] |= ((1U << 20) | (1U << 22) | (1U << 24) | (1U << 26) | (1U << 28));
+    GPIOA -> AFR[0] |= ((1U << 20) | (1U << 22) | (1U << 24) | (1U << 26) | (1U << 28)); 
     GPIOA -> AFR[0] &= ~((1U << 21) | (1U << 23) | (1U << 25) | (1U << 27) | (1U << 31));
 ```
+- For SPI, after setting pins are altenate function, developer will need to setup the AFR for GPIO pins that going to use for altenate function. In STM32f4, this is important when using AF pins because the f4 is more flexible and one pin can use in many functions that need extra step, while stm32f1 chip not that flexible so when developer would like to use altenate functions pin just only need to active and dont need to setting up register like F4
+- Structure to write down AF register is
+```
+GPIOx -> AFR[0 or 1] &= ~(0xF << (pin* 4));
+GPIOx -> AFR[0 or 1] |= (pin number << (pin *4));
+```
+NOTE: 0 for pin 0 to 7 and 1 for pin 8 to 15. 
+for this style:
+```
+GPIOA -> AFR[0] |= ((1U << 20) | (1U << 22) | (1U << 24) | (1U << 26) | (1U << 28));
+GPIOA -> AFR[0] &= ~((1U << 21) | (1U << 23) | (1U << 25) | (1U << 27) | (1U << 31));
+```
+The logic is set each bit to become the number of pin, for example 5 is 0101, pin A is bit [23:20] so when clear and write we have
+- bit 20: 1
+- bit 21: 0
+- bit 22: 1
+- bit 23: 0
+Same logic with pin 6 and 7, however this style make it slow and only for teaching to show how the SPI pins works
+
 - In configuration function, developer will setting up specific for the slave that going to use. In this function there are four critical things need to be setting up are Clock Polarity (CPOL), Master/Slave declaration, Clock Speed (prescals), and Clock Phase (CPHA). 
  - Start with CPOL (Clock Polarity), short explaination is the default or inactive state of a signal
    	- CPOL = 0 -> clock idle LOW
