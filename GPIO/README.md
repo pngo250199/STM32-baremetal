@@ -32,10 +32,10 @@ NOTE: GPIOx_BSRR (bit set/reset register) and GPIOx_LCKR (locking register) are 
   pin &= ~(0x3 << (pin number *2); // *2 because the F4 using 2 bits and 0x3 is 11 in binary
   pin |= (mode << (pin number * 2); modes are 00, 01, 10, and 11
   ```
-  - 00: Input mode (reset state)
-  - 01: General purpose output mode
-  - 10: Alternate function mode
-  - 11: Analog mode
+  - 00: Input mode (reset state) - 0 in decimal
+  - 01: General purpose output mode - 1 in decimal
+  - 10: Alternate function mode - 2 in decimal
+  - 11: Analog mode - 3 in decimal
   
 For example choosing pin PA5 (bit 11:10):
   - 0x3 = 0011 -> clear at bit 10 -> 0000
