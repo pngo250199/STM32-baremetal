@@ -58,6 +58,7 @@ The logic is set each bit to become AF number mode, for example 5 is 0101, pin A
 - bit 23: 0
 Same logic with pin 6 and 7, however this style make it slow and only for teaching to show how the SPI pins works
 
+3. Configuration 
 - In configuration function, developer will setting up specific for the slave that going to use. In this function there are four critical things need to be setting up are Clock Polarity (CPOL), Master/Slave declaration, Clock Speed (prescals), and Clock Phase (CPHA). 
  - Start with CPOL (Clock Polarity), short explaination is the default or inactive state of a signal
    	- CPOL = 0 -> clock idle LOW
